@@ -74,7 +74,6 @@ function Signup() {
                         id="name"
                         name="name"
                         type="name"
-                        value="rohit"
                         ref={usernameRef}
                         required
                         placeholder="Your Username"
@@ -95,7 +94,6 @@ function Signup() {
                         id="email"
                         name="email"
                         type="email"
-                        value="rohitparakh4@gmail.com"
                         ref={emailref}
                         required
                         placeholder="Your Email"
@@ -115,7 +113,6 @@ function Signup() {
                       <input
                         id="password"
                         name="password"
-                        value="password"
                         type="password"
                         autoComplete="current-password"
                         ref={passwordref}
@@ -137,7 +134,6 @@ function Signup() {
                       <input
                         id="password"
                         name="password"
-                        value="password"
                         type="password"
                         autoComplete="current-password"
                         ref={passwordconfirmref}
