@@ -25,6 +25,10 @@ import {
 } from "../constants/userConstants";
 import axios from "axios";
 
+var env = process.env.NODE_ENV;
+var apiUrl;
+env === "development" ? (apiUrl = "http://localhost:8000") : (apiUrl = "");
+
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({
@@ -38,7 +42,7 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "http://localhost:8000/api/users/login",
+      `${apiUrl}/api/users/login`,
       { email, password },
       config
     );
@@ -83,7 +87,7 @@ export const register = (name, email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "http://localhost:8000/api/users",
+      `${apiUrl}/api/users`,
       { name, email, password },
       config
     );
@@ -126,10 +130,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(
-      `http://localhost:8000/api/users/${id}`,
-      config
-    );
+    const { data } = await axios.get(`${apiUrl}/api/users/${id}`, config);
 
     dispatch({
       type: USER_DETAILS_SUCCESS,
@@ -164,7 +165,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:8000/api/users/profile`,
+      `${apiUrl}/api/users/profile`,
       user,
       config
     );
@@ -200,7 +201,7 @@ export const listUsers = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`http://localhost:8000/api/users`, config);
+    const { data } = await axios.get(`${apiUrl}/api/users`, config);
 
     dispatch({
       type: USER_LIST_SUCCESS,
@@ -233,10 +234,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.delete(
-      `http://localhost:8000/api/users/${id}`,
-      config
-    );
+    const { data } = await axios.delete(`${apiUrl}/api/users/${id}`, config);
 
     dispatch({
       type: USER_DELETE_SUCCESS,
@@ -271,7 +269,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:8000/api/users/${user._id}`,
+      `${apiUrl}/api/users/${user._id}`,
       user,
       config
     );

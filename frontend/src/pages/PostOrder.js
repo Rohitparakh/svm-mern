@@ -17,6 +17,10 @@ import {
 } from "../constants/orderConstants";
 
 const PostOrder = () => {
+  var env = process.env.NODE_ENV;
+  var apiUrl;
+  env === "development" ? (apiUrl = "http://localhost:8000") : (apiUrl = "");
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let { id } = useParams();
@@ -40,9 +44,7 @@ const PostOrder = () => {
       navigate("/");
     }
     const addPayPalScript = async () => {
-      const { data: clientId } = await axios.get(
-        "http://localhost:8000/api/config/paypal"
-      );
+      const { data: clientId } = await axios.get(`${apiUrl}/api/config/paypal`);
       const script = document.createElement("script");
       script.type = "text/javascript";
       script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;

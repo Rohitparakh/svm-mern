@@ -6,8 +6,14 @@ import {
   CART_SAVE_SHIPPING_ADDRESS,
 } from "../constants/cartConstants";
 
+var env = process.env.NODE_ENV;
+var apiUrl;
+env === "development" ? (apiUrl = "http://localhost:8000") : (apiUrl = "");
+console.log(env);
+console.log(apiUrl);
+
 export const addToCart = (id, qty) => async (dispatch, getState) => {
-  const { data } = await axios.get(`http://localhost:8000/api/products/${id}`);
+  const { data } = await axios.get(`${apiUrl}/api/products/${id}`);
   dispatch({
     type: CART_ADD_ITEM,
     payload: {

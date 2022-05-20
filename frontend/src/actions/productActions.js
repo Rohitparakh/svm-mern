@@ -23,11 +23,15 @@ import {
 } from "../constants/productConstants";
 import axios from "axios";
 
+var env = process.env.NODE_ENV;
+var apiUrl;
+env === "development" ? (apiUrl = "http://localhost:8000") : (apiUrl = "");
+
 export const listProducts = () => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
 
-    const { data } = await axios.get("http://localhost:8000/api/products");
+    const { data } = await axios.get(`${apiUrl}/api/products`);
 
     dispatch({
       type: PRODUCT_LIST_SUCCESS,
@@ -51,10 +55,10 @@ export const getCategoryProduct =
     try {
       dispatch({ type: CATEGORY_PRODUCT_REQUEST });
 
-      let link = `http://localhost:8000/api/products/category?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+      let link = `${apiUrl}/api/products/category?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
 
       if (category) {
-        link = `http://localhost:8000/api/products/category?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
+        link = `${apiUrl}/api/products/category?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
       }
 
       const { data } = await axios.get(link);
@@ -75,9 +79,7 @@ export const listProductsDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
-    const { data } = await axios.get(
-      `http://localhost:8000/api/products/${id}`
-    );
+    const { data } = await axios.get(`${apiUrl}/api/products/${id}`);
 
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,
@@ -110,7 +112,7 @@ export const deleteProducts = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`http://localhost:8000/api/products/${id}`, config);
+    await axios.delete(`${apiUrl}/api/products/${id}`, config);
 
     dispatch({
       type: PRODUCT_DELETE_SUCCESS,
@@ -142,11 +144,7 @@ export const createProducts = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(
-      `http://localhost:8000/api/products`,
-      {},
-      config
-    );
+    const { data } = await axios.post(`${apiUrl}/api/products`, {}, config);
 
     dispatch({
       type: PRODUCT_CREATE_SUCCESS,
@@ -181,7 +179,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:8000/api/products/${product._id}`,
+      `${apiUrl}/api/products/${product._id}`,
       product,
       config
     );
@@ -220,7 +218,7 @@ export const createProductReview =
       };
 
       await axios.post(
-        `http://localhost:8000/api/products/${productId}/reviews`,
+        `${apiUrl}/api/products/${productId}/reviews`,
         review,
         config
       );

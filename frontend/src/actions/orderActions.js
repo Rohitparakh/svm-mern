@@ -20,6 +20,10 @@ import {
   ORDER_PAY_SUCCESS,
 } from "../constants/orderConstants";
 
+var env = process.env.NODE_ENV;
+var apiUrl;
+env === "development" ? (apiUrl = "http://localhost:8000") : (apiUrl = "");
+
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -37,11 +41,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(
-      `http://localhost:8000/api/orders`,
-      order,
-      config
-    );
+    const { data } = await axios.post(`${apiUrl}/api/orders`, order, config);
 
     dispatch({
       type: ORDER_CREATE_SUCCESS,
@@ -74,10 +74,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(
-      `http://localhost:8000/api/orders/${id}`,
-      config
-    );
+    const { data } = await axios.get(`${apiUrl}/api/orders/${id}`, config);
 
     dispatch({
       type: ORDER_DETAILS_SUCCESS,
@@ -113,7 +110,7 @@ export const payOrderDetails =
       };
 
       const { data } = await axios.put(
-        `http://localhost:8000/api/orders/${orderId}/pay`,
+        `${apiUrl}/api/orders/${orderId}/pay`,
         paymentResult,
         config
       );
@@ -149,10 +146,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(
-      `http://localhost:8000/api/orders/myorders`,
-      config
-    );
+    const { data } = await axios.get(`${apiUrl}/api/orders/myorders`, config);
 
     dispatch({
       type: ORDER_LIST_MY_SUCCESS,
@@ -185,10 +179,7 @@ export const listOrders = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(
-      `http://localhost:8000/api/orders/`,
-      config
-    );
+    const { data } = await axios.get(`${apiUrl}/api/orders/`, config);
 
     dispatch({
       type: ORDER_LIST_SUCCESS,
@@ -222,7 +213,7 @@ export const deliverOrderDetails = (order) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:8000/api/orders/${order._id}/deliver`,
+      `${apiUrl}/api/orders/${order._id}/deliver`,
       {},
       config
     );

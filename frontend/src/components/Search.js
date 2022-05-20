@@ -10,6 +10,10 @@ const Search = () => {
   const [searchData, setSearchData] = useState();
   const wrapperRef = useRef(null);
 
+  var env = process.env.NODE_ENV;
+  var apiUrl;
+  env === "development" ? (apiUrl = "http://localhost:8000") : (apiUrl = "");
+
   useEffect(() => {
     debouncedSearchAutocomplete(search);
   }, [search]);
@@ -18,9 +22,7 @@ const Search = () => {
     debounce(async (search) => {
       // console.log(`Searching result after 500 ${search}`)
       const { data } = await axios.get(
-        `http://localhost:8000/api/search?query=${
-          search !== "" ? search : undefined
-        }`
+        `${apiUrl}/api/search?query=${search !== "" ? search : undefined}`
       );
       setSearchData(data);
       console.log(data);

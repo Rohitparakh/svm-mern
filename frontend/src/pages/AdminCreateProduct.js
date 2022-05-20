@@ -7,6 +7,10 @@ import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
 import axios from "axios";
 
 const AdminCreateProduct = () => {
+  var env = process.env.NODE_ENV;
+  var apiUrl;
+  env === "development" ? (apiUrl = "http://localhost:8000") : (apiUrl = "");
+
   const [openSidebar, setOpenSidebar] = useState(false);
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
@@ -85,7 +89,7 @@ const AdminCreateProduct = () => {
       };
 
       const { data } = await axios.post(
-        "http://localhost:8000/api/upload",
+        `${apiUrl}/api/upload`,
         formData,
         config
       );
