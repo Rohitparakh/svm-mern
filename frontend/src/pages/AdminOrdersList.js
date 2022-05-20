@@ -107,7 +107,7 @@ const AdminOrdersList = () => {
                             scope="col"
                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                           >
-                            Product Id
+                            Order Id
                           </th>
                           <th
                             scope="col"
@@ -240,8 +240,8 @@ const AdminOrdersList = () => {
         <footer className="footer px-4 py-6">
           <div className="footer-content">
             <p className="text-sm text-gray-600 text-center">
-              © Brandname 2020. All rights reserved.{" "}
-              <a href="https://twitter.com/iaminos">by iAmine</a>
+              © Rohstore 2020. All rights reserved.{" "}
+              <a href="https://rohcodes.com">by Rohit</a>
             </p>
           </div>
         </footer>

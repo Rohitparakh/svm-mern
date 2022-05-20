@@ -24,7 +24,7 @@ const PostOrder = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let { id } = useParams();
-
+  // alert(id);
   const [sdkReady, setSdkReady] = useState(false);
 
   const orderDetails = useSelector((state) => state.orderDetails);
@@ -76,6 +76,9 @@ const PostOrder = () => {
   const deliverHandler = () => {
     dispatch(deliverOrderDetails(order));
   };
+  useEffect(() => {
+    dispatch(getOrderDetails(id));
+  }, []);
 
   return loading ? (
     <Loader />
