@@ -17,7 +17,11 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 const app = express();
 
-const whitelist = ["http://localhost:3000/", "http://rohstore.herokuapp.com/"];
+const whitelist = [
+  "http://localhost:3000",
+  "http://rohstore.herokuapp.com",
+  "https://rohstore.herokuapp.com",
+];
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || whitelist.indexOf(origin) !== -1) {
