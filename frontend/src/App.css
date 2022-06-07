@@ -1,0 +1,13 @@
+span.tag {
+  background: lightgrey;
+  padding: 5px 8px;
+  margin: 0 5px;
+}
+
+span.tag button {
+  margin: 0 2px 0 5px;
+}
+
+.mt-10 {
+  margin: 15px 0;
+}
