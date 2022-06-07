@@ -59,7 +59,7 @@ const AdminCreateProduct = () => {
     // console.log(successUpdate)
     if (successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET });
-      // window.location.reload();
+      window.location.reload();
     } else {
       if (product === undefined || !product.name || product._id !== id) {
         dispatch(listProductsDetails(id));
