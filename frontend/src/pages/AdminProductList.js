@@ -193,7 +193,12 @@ const AdminProductList = () => {
                                     {product.name}
                                   </p>
                                   <div className="text-sm text-gray-500">
-                                    {product.category}
+                                    {product.category.map((val,i,arr)=>{
+                                      if (i==arr.length-1){
+                                        return(`${val}`)
+                                        }
+                                        return(`${val}, `)
+                                    })}
                                   </div>
                                   <div className="text-sm text-gray-500">
                                     {product.brand}

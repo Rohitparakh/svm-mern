@@ -57,7 +57,7 @@ function ShoppingCart() {
               >
                 <Link
                   className="flex items-center text-gray-500 hover:text-gray-600 cursor-pointer"
-                  to={`/product/${productId}`}
+                  to={productId!=undefined?`/product/${productId}`:`/`}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +116,12 @@ function ShoppingCart() {
                             Brand: {item.brand}
                           </p>
                           <p className="text-xs leading-3 text-gray-600 pb-4 pt-2">
-                            Category: {item.category}
+                            Category: {item.category.map((val,i,arr)=>{
+                               if (i==arr.length-1){
+                                return(`${val}`)
+                                }
+                                return(`${val}, `)
+                            })}
                           </p>
                           {/* <p className="w-96 text-xs leading-3 text-gray-600">Composition: 100% calf leather</p> */}
                           <div className="flex items-center justify-between pt-5 pr-6">

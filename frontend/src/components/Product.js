@@ -32,7 +32,12 @@ const Product = ({ product }) => {
               }`}
             />
           </h3>
-          <p className="mt-1 text-sm text-gray-500">{product.category}</p>
+          <p className="mt-1 text-sm text-gray-500">{product.category.map((val,i,arr)=>{
+            if (i==arr.length-1){
+            return(`${val}`)
+            }
+            return(`${val}, `)
+          })}</p>
         </div>
         <p className="text-md font-medium text-gray-900">${product.price}</p>
       </div>
