@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ProductReview from "./ProductReview";
+import ProductMetadata from "./ProductMetadata";
 import Rating from "./Rating";
 
 const ProductDetailsUI = ({ product }) => {
@@ -61,10 +62,10 @@ const ProductDetailsUI = ({ product }) => {
           </div>
 
           <p className=" font-normal text-base leading-6 text-gray-600 mt-7">
-            {product.description}
+            {product.description.slice(0,75)+"..."}
           </p>
           <p className=" font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 mt-6 ">
-            ${product.price}
+            &#8377;{product.price}
           </p>
 
           <div className="lg:mt-11 mt-10">
@@ -140,6 +141,7 @@ const ProductDetailsUI = ({ product }) => {
         </div>
       </div>
       <div>
+        <ProductMetadata product={product}/>
         <ProductReview />
       </div>
     </div>

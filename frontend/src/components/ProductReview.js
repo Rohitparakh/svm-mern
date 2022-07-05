@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { createProductReview } from "../actions/productActions";
+import { createProductReview, updateProductReview } from "../actions/productActions";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 import Rating from "./Rating";
+import EditReview from "./EditReview";
 
 const ProductReview = () => {
   const [menu, setMenu] = useState(true);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+  const [editReviewToggle, setEditReviewToggle] = useState(false);
+  const [editReviewId, setEditReviewId] = useState("");
 
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -18,7 +21,7 @@ const ProductReview = () => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-
+// console.log(userInfo)
   const productReviewCreate = useSelector((state) => state.productReviewCreate);
   const { success: successProductReview, error: errorProductReview } =
     productReviewCreate;
@@ -33,6 +36,27 @@ const ProductReview = () => {
     );
   };
 
+  const updateReview = (rating, comment)=>{
+    var newReview = product.reviews.filter((val,i)=>{
+      return val._id === editReviewId;
+    })
+    newReview = newReview[0];
+    newReview = {...newReview,
+                  rating: rating || newReview.rating,
+                  comment: comment || newReview.comment
+                }
+                console.log(newReview)
+    dispatch(
+      updateProductReview(product._id,newReview)
+    );
+    setEditReviewToggle(false);
+    window.location.reload();
+  }
+  const editReview = (id) => {
+    setEditReviewToggle(true);
+    setEditReviewId(id);
+  }
+
   useEffect(() => {
     if (successProductReview) {
       alert("Review Submitted");
@@ -41,7 +65,14 @@ const ProductReview = () => {
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
     }
   }, [successProductReview, dispatch]);
-
+ 
+  useEffect(() => {
+ if(editReviewToggle===true){
+  document.getElementById("overlay").style.display = "block";
+ }else{
+  document.getElementById("overlay").style.display = "none";
+ }
+  }, [editReviewToggle]);
   return (
     <div className="py-12 px-4 md:px-6 2xl:px-0 2xl:container 2xl:mx-auto flex justify-center items-center">
       <div className="flex flex-col justify-start items-start w-full space-y-8">
@@ -70,11 +101,11 @@ const ProductReview = () => {
                 value={rating}
                 onChange={(e) => setRating(e.target.value)}
               >
-                <option value={1}>1 - Poor</option>
-                <option value={2}>2 - Fair</option>
-                <option value={3}>3 - Good</option>
-                <option value={4}>4 - Very Good</option>
                 <option value={5}>5 - Excellent</option>
+                <option value={4}>4 - Very Good</option>
+                <option value={3}>3 - Good</option>
+                <option value={2}>2 - Fair</option>
+                <option value={1}>1 - Poor</option>
               </select>
             </div>
             <div>
@@ -107,11 +138,14 @@ const ProductReview = () => {
           </p>
         )}
 
+
         {product.reviews.map((review) => (
+          
           <div
             className="w-full flex justify-start items-start flex-col bg-gray-50 p-8"
             key={review._id}
           >
+        {editReviewToggle?<EditReview review={review} updateReview={updateReview} setEditReviewToggle={setEditReviewToggle}/>:<></>}
             <div className="flex flex-col md:flex-row justify-between w-full">
               <div className="cursor-pointer mt-2 md:mt-0">
                 <Rating value={review.rating} />
@@ -132,13 +166,18 @@ const ProductReview = () => {
                   </p>
                   <p className="text-sm leading-none text-gray-600">
                     {review.createdAt.substring(0, 10)}
-                  </p>
+                  </p>                  
+                  {
+                  review.user==userInfo?._id?(
+                  <p class="editReview" onClick={()=>editReview(review._id)}>Edit Review</p>
+                  ):null
+                  }
                 </div>
               </div>
               {/* <div className="flex flex-row justify-between items-start mt-2">
                                 <p className="text-xl md:text-2xl font-medium leading-normal text-gray-800">Beautiful addition to the theme</p>
                             </div> */}
-              <p className="mt-3 text-base leading-normal text-gray-600 w-full md:w-9/12 xl:w-5/6">
+              <p className="mt-3 text-base leading-normal text-gray-600 w-full md:w-12/12 xl:w-5/6">
                 {review.comment}
               </p>
             </div>

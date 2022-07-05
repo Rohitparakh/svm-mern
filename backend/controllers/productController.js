@@ -1,7 +1,7 @@
 import asyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
 import { ApiFeatures } from "../utils/apiFeatures.js";
-
+import mongoose from "mongoose";
 // @desc fetch all products
 // @route GET /api/products
 // @access Public
@@ -81,6 +81,7 @@ const createProduct = asyncHandler(async (req, res) => {
     countInStock: 1,
     numReviews: 0,
     description: "Sample Description",
+    discount: 10
   });
   const createdProduct = await product.save();
   res.status(201).json(createdProduct);
@@ -172,6 +173,61 @@ const createProductReview = asyncHandler(async (req, res) => {
   }
 });
 
+
+// @desc    Edit review
+// @route   PUT /api/products/:id/reviews/:id
+// @access  Private
+const updateProductReview = asyncHandler(async (req, res) => {
+  var {
+    name,
+    rating,
+    comment,
+    user,
+    _id,
+
+  } = req.body.review;
+  _id = new mongoose.Types.ObjectId(_id);
+  user = new mongoose.Types.ObjectId(user);
+
+
+  const newReview = {
+    name:name,
+    rating: rating,
+    comment: comment,
+    user: user,
+    _id: _id,
+  }
+
+  const productId = req.body.productId;
+  const product = await Product.findById(productId);
+  // console.log(product)
+
+  
+console.log(reviewIndex)
+  if (product) {
+     
+    var reviewIndex = product.reviews.findIndex((review)=>{
+      return review.name === name
+    });
+    console.log(reviewIndex)
+    
+    product.reviews[reviewIndex]=newReview
+    
+    // product.reviews[reviewIndex]=newReview;
+  // console.log(product)
+  // console.log(product.reviews[0]._id)
+  // var istrue=(_id === product.reviews[0]._id)?true:false;
+  // console.log(istrue)
+
+    const updatedProduct = await product.save();
+  // console.log(updatedProduct.reviews);
+
+    res.json(updatedProduct);
+  } else {
+    res.status(404);
+    throw new Error("Product not found");
+  }
+});
 export {
   getProducts,
   getProductById,
@@ -179,5 +235,6 @@ export {
   createProduct,
   updateProduct,
   createProductReview,
+  updateProductReview,
   getCategoryProducts,
 };

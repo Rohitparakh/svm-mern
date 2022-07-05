@@ -250,9 +250,17 @@ const AdminCreateProduct = () => {
             {" "}
             Go Back
           </Link>
-          <h1 className="font-bold text-2xl text-gray-700 mb-5">
+          <div className="mb-5" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+          <h1 className="font-bold text-2xl text-gray-700">
             Edit Product Details
           </h1>
+            <Link to ={`/product/${product._id}`}
+              target="_blank"
+              className="text-green-600 hover:text-green-900"
+            >
+              View Product in Store
+            </Link>
+          </div>
           {loadingUpdate && <p>Loading...</p>}
           {errorUpdate && <p>{errorUpdate}</p>}
           {loading ? (

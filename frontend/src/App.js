@@ -15,6 +15,8 @@ import AdminEditUser from "./pages/AdminEditUser";
 import AdminProductList from "./pages/AdminProductList";
 import AdminCreateProduct from "./pages/AdminCreateProduct";
 import AdminOrdersList from "./pages/AdminOrdersList";
+import AdminNotifications from "./pages/AdminNotifications";
+import AdminSettings from "./pages/AdminSettings";
 import CategoryPage from "./pages/CategoryPage";
 import ScrollToTop from "./components/ScrollToTop";
 import Category from "./pages/Category";
@@ -45,6 +47,8 @@ function App() {
             element={<AdminCreateProduct />}
           />
           <Route path="/admin/orderlist" element={<AdminOrdersList />} />
+          <Route path="/admin/notifications" element={<AdminNotifications />} />
+          <Route path="/admin/settings" element={<AdminSettings />} />
         </Routes>
       </BrowserRouter>
     </div>

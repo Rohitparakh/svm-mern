@@ -39,7 +39,7 @@ const Product = ({ product }) => {
             return(`${val}, `)
           })}</p>
         </div>
-        <p className="text-md font-medium text-gray-900">${product.price}</p>
+        <p className="text-md font-medium text-gray-900">&#8377;{product.price}</p>
       </div>
     </Link>
   );

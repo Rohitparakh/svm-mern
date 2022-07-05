@@ -25,10 +25,17 @@ const searchProducts = asyncHandler(async (req, res) => {
   //   } else {
   //     res.status(404);
   //     throw new Error("Product not found");
-  //   }
+    // }
   var query = { name: req.query.query };
+  // const query = { $text: { $search: req.query.query } };
+  // const projection = {
+    // _id: 0,
+    // name: 1,
+  // };
   var result = await Product.find(query).exec();
   res.json(result);
+
+  
 });
 
 // @desc search category products
