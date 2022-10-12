@@ -151,7 +151,6 @@ const Product = mongoose.model("Product", productSchema);
 
 export default Product;
 
-// import  mongoose  from "mongoose";
 
 // const reviewSchema = mongoose.Schema ({
 //     name:{type:String, required: true},

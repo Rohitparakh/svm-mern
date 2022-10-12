@@ -1,6 +1,6 @@
 import "./App.css";
 import Homepage from "./pages/Homepage";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import ProductScreen from "./pages/ProductScreen";
 import ShoppingCart from "./pages/ShoppingCart";
 import Login from "./pages/Login";
@@ -27,17 +27,17 @@ function App() {
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/product/:id" element={<ProductScreen />} />
+          <Route exact path="/" element={<Navigate to="/login" replace />} />
+          {/* <Route path="/product/:id" element={<ProductScreen />} /> */}
           <Route path="/login" element={<Login />} />
-          <Route path="/cart/:id" element={<ShoppingCart />} />
-          <Route path="/cart" element={<ShoppingCart />} />
+          {/* <Route path="/cart/:id" element={<ShoppingCart />} /> */}
+          {/* <Route path="/cart" element={<ShoppingCart />} /> */}
           <Route path="/signup" element={<Signup />} />
-          <Route path="/shipping" element={<Shipping />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/placeorder" element={<PlaceOrder />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/category" element={<CategoryPage />} />
+          {/* <Route path="/shipping" element={<Shipping />} /> */}
+          {/* <Route path="/payment" element={<Payment />} /> */}
+          {/* <Route path="/placeorder" element={<PlaceOrder />} /> */}
+          {/* <Route path="/profile" element={<Profile />} /> */}
+          {/* <Route path="/category" element={<CategoryPage />} /> */}
           <Route path="/order/:id" element={<PostOrder />} />
           <Route path="/admin" element={<AdminUserList />} />
           <Route path="/admin/productlist" element={<AdminProductList />} />

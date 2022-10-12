@@ -3,7 +3,7 @@ import React from "react";
 const Support = () => {
   return (
     <>
-      <div className="support-area pt-40 pb-60">
+      <div className="support-area pt-20 pb-20">
         <div className="container">
           <div className="row">
             <div className="col-lg-3 col-sm-6">

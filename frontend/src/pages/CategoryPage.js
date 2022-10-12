@@ -83,7 +83,7 @@ const CategoryPage = () => {
                       <input
                         type="checkbox"
                         className=" h-5 w-5 text-gray-600 "
-                        name="category"
+                        name="brand"
                         value={item}
                         id={item}
                         onClick={() =>
@@ -97,7 +97,7 @@ const CategoryPage = () => {
               )}
             </div>
             <div className="space-y-2 mx-12 my-6">
-              <h2 className=" font-semibold text-lg text-gray-500">Brands</h2>
+              <h2 className=" font-semibold text-lg text-gray-500">Category</h2>
               {loading ? (
                 <p>Loading category...</p>
               ) : error ? (
@@ -107,6 +107,7 @@ const CategoryPage = () => {
                   {category.map((item) => (
                     <label className=" cursor-pointer inline-flex items-center mt-3">
                       <input
+                        name="category"                    
                         type="checkbox"
                         className=" h-5 w-5 text-gray-600 "
                       />

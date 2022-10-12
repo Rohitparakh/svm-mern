@@ -11,12 +11,12 @@ const AdminEditUser = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [isAdmin, setisAdmin] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
 
   const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.userDetails);
+  const [isAdmin, setisAdmin] = useState(userDetails.user.isAdmin || false);
   const { loading, error, user } = userDetails;
 
   const userUpdate = useSelector((state) => state.userUpdate);
@@ -141,27 +141,19 @@ const AdminEditUser = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
 
-              <label className="inline-flex items-center">
+              <div style={{display:"flex"}}>
                 <input
-                  type="radio"
-                  className="form-radio"
-                  name="admin"
-                  value="PayPal"
-                  onClick={(e) => setisAdmin(true)}
+                  className="px-2 focus:outline-none  border-b border-gray-200 leading-4 text-base placeholder-gray-600 py-4 w-full"
+                  type="checkbox"
+                  checked={isAdmin}
+                  value={isAdmin}
+                  onChange={(e) => setisAdmin(!isAdmin)}
+                  id="isAdmin" 
+                  name="isAdmin"
                 />
-                <span className="ml-2 text-xl font-semibold">Admin</span>
-              </label>
-              <label className="inline-flex items-center mt-2 mb-5">
-                <input
-                  type="radio"
-                  className="form-radio"
-                  name="admin"
-                  value="Stripe"
-                  onClick={(e) => setisAdmin(false)}
-                />
-                <span className="ml-2 text-xl font-semibold">Not Admin</span>
-              </label>
-
+                <label for="isAdmin" style={{width:"150px"}}>Is Admin?</label>
+              </div>
+                                            
               <button
                 type="submit"
                 className="focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 mt-8 text-base font-medium  focus:ring-ocus:ring-gray-800 leading-4 hover:bg-black py-4 w-full md:w-4/12 lg:w-full text-white bg-gray-800"

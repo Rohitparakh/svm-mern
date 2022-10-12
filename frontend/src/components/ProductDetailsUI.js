@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { FaWhatsapp } from 'react-icons/fa';
 import ProductReview from "./ProductReview";
 import ProductMetadata from "./ProductMetadata";
 import Rating from "./Rating";
+
 
 const ProductDetailsUI = ({ product }) => {
   const [rotate, setRotate] = useState(false);
@@ -31,6 +33,8 @@ const ProductDetailsUI = ({ product }) => {
   const addToCartHandler = () => {
     navigate(`/cart/${id}?qty=${count}`);
   };
+
+ 
 
   return (
     <div className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4 ">
@@ -119,16 +123,19 @@ const ProductDetailsUI = ({ product }) => {
             </button>
           )}
           <button
-            onClick={addToCartHandler}
-            className="focus:outline-none focus:ring-2 hover:bg-black focus:ring-offset-2 focus:ring-gray-800 font-medium text-base leading-4 text-white bg-gray-800 w-full py-5 lg:mt-12 mt-6"
+            className="focus:outline-none focus:ring-2 hover:bg-black focus:ring-offset-2 focus:ring-gray-800 font-medium text-base leading-4 text-white bg-gray-800 w-full py-5 lg:mt-6 mt-6"
           >
+            <a href="tel:9840989414">
             Call Us
+            </a>
           </button>
+          {FaWhatsapp}
           <button
-            onClick={addToCartHandler}
-            className="focus:outline-none focus:ring-2 hover:text-black focus:ring-offset-2 focus:ring-gray-800 font-medium text-base leading-4 text-blue bg-white-800 w-full py-5 lg:mt-12 mt-6"
+            className="focus:outline-none focus:ring-2 hover:text-black focus:ring-offset-2 focus:ring-gray-800 font-medium text-base leading-4 text-blue bg-white-800 w-full py-5 lg:mt-4 mt-4"
           >
+            <a target="_blank" href="https://wa.me/919840989414">
             Whatsapp
+            </a>
           </button>
         </div>
 

@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../actions/userActions";
 
 const Sidebar = ({ openSidebar }) => {
+  const dispatch = useDispatch();
+  const logoutHandler = () => {
+    dispatch(logout());
+  };
   return (
     <aside
       className={`sidebar w-64 md:shadow transform ${
@@ -133,8 +139,9 @@ const Sidebar = ({ openSidebar }) => {
 
           <li className="my-px">
             <Link
-              to="/"
+              to="/login"
               className="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700"
+              onClick={logoutHandler}
             >
               <span className="flex items-center justify-center text-lg text-red-400">
                 <svg
@@ -149,7 +156,7 @@ const Sidebar = ({ openSidebar }) => {
                   <path d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
                 </svg>
               </span>
-              <span className="ml-3">Close Admin Panel</span>
+              <span className="ml-3" >Logout</span>
             </Link>
           </li>
         </ul>

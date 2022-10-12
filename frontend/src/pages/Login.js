@@ -3,6 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 // import { Helmet } from 'react-helmet'
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/userActions";
+import { logout } from "../actions/userActions";
 
 function Login() {
   const emailref = useRef();
@@ -18,8 +19,12 @@ function Login() {
   useEffect(() => {
     if (userInfo && userInfo.isAdmin && redirectUrl === "admin") {
       navigate("/admin");
-    } else if (userInfo) {
-      navigate("/");
+    } else if (userInfo && userInfo.isAdmin) {
+      navigate("/admin");
+    } else if(userInfo){
+      alert("The user in unauthorised");
+      dispatch(logout())
+      navigate("/")
     }
   }, [userInfo]);
 

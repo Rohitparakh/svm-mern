@@ -61,7 +61,7 @@ const AdminCreateProduct = () => {
       dispatch({ type: PRODUCT_UPDATE_RESET });
       window.location.reload();
     } else {
-      if (product === undefined || !product.name || product._id !== id) {
+      if (product === undefined || !product.name || product?._id !== id) {
         dispatch(listProductsDetails(id));
       } else {
         setName(product.name);
@@ -254,7 +254,7 @@ const AdminCreateProduct = () => {
           <h1 className="font-bold text-2xl text-gray-700">
             Edit Product Details
           </h1>
-            <Link to ={`/product/${product._id}`}
+            <Link to ={`/product/${product?._id}`}
               target="_blank"
               className="text-green-600 hover:text-green-900"
             >

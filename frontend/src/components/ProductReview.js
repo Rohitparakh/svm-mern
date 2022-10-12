@@ -8,7 +8,7 @@ import EditReview from "./EditReview";
 
 const ProductReview = () => {
   const [menu, setMenu] = useState(true);
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
   const [editReviewToggle, setEditReviewToggle] = useState(false);
   const [editReviewId, setEditReviewId] = useState("");
